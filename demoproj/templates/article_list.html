@@ -20,7 +20,7 @@
         <td> {{article.date_verified}} </td>
 
         <td> <a href = "{% url 'delete_detail' id=article.id %}"><button style="background-color:red" class ="btn btn-danger">Delete</button> </a></td>
-        <td> <a><button style="background-color:green" class ="btn btn-danger">Update</button> </a></td>
+        <td> <a><button style="background-color:green " class ="btn btn-danger">Update</button> </a></td>
         <td> <a href = "{% url 'article_detail' id=article.id %}"><button style="background-color:yellow" class ="btn btn-danger">View</button> </a></td>
     </tr>
 {% endfor %}

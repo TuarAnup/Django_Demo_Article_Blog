@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>{{article.title}}</h1>
+
+
+<form method="post" action="{% url 'add_article' %}">
+    {% csrf_token %} 
+
+ 
+
+    <input type='text' name="title">
+    <input type='text' name="content">
+    <button type='submit'>Submit</button>
+
+</form>
+
+<p>{{article.content}}</p>
+
+</body>
+</html>
