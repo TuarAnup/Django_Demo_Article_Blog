@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from artical.form import ArticleForm
+from artical.form import ArticleForm, ArticleModelForm
 
 from artical.models import Article
 from datetime import datetime
@@ -31,11 +31,30 @@ def add_article(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
+            article = form.save()(commit=False)
+            article.date_published =datetime.now().date()
         
-            title = request.POST.get('title')
-            content = request.POST.get('content')
-            article = Article(title=title,content=content,date_published=datetime.now().date())
-            article.save()
+            # title = request.POST.get('title')
+            # content = request.POST.get('content')
+            # article = Article(title=title,content=content,date_published=datetime.now().date())
+            # article.save()
+            
             return redirect('dashboard')
+        else:
+            return HttpResponse('Invalid Form')
 
-
+def update_article(request,id):
+    if request.method == 'GET':
+        article = Article.objects.get(id=id)
+        form = ArticleModelForm(instance=article)
+        return render(request,'update_article.html',context={'form':form,'id':id})
+    if request.method == 'POST':
+        article = Article.objects.get(id=id)
+        form = ArticleModelForm(request.POST,instance=article)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+        else:
+            return HttpResponse('Invalid Updates')
+            
+        

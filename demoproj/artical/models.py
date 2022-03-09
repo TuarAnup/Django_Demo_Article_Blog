@@ -9,3 +9,5 @@ class Article(models.Model):
     date_published = models.DateField()
     date_verified = models.DateField(null = True)
     
+    
+    #email = models.EmailField(null=True)

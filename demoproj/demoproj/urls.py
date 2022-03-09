@@ -23,5 +23,7 @@ urlpatterns = [
     path('dashboard/',views.all_articles,name = 'dashboard'),
     path('view_article/<int:id>/',views.article_detail, name = 'article_detail') ,#you are going to send a particular number with that string which makes the url dynamic
     path('delete_article/<int:id>/',views.delete_detail, name = 'delete_detail'),
-    path('add_article/',views.add_article, name = 'add_article') 
+    path('add_article/',views.add_article, name = 'add_article'),
+    path('update_article/<int:id>/',views.update_article, name = 'update_article')
+    
 ]
