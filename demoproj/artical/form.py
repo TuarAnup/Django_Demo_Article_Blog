@@ -9,6 +9,7 @@ class ArticleForm(forms.Form):
 class ArticleModelForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = '__all__' #for all fields that are used in the models
+        fields = ('title','content')
+        #fields = '__all__' #for all fields that are used in the models
         
         

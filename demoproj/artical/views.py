@@ -1,10 +1,15 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from artical.form import ArticleForm, ArticleModelForm
-
+from django.utils.decorators import method_decorator
 from artical.models import Article
+from rest_framework.views import APIView
 from datetime import datetime
 from artical.form import ArticleForm
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt #no particular csrf token is needed 
+
+from artical.serializers import ArticleSerializer
 
 # Create your views here.
 def all_articles(request):
@@ -25,19 +30,19 @@ def delete_detail(request,id):
     
 def add_article(request):
     if request.method == 'GET':
-        form = ArticleForm()
+        form = ArticleModelForm()
         
         return render(request,'add_article.html',context={'form':form})
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleModelForm(request.POST)
         if form.is_valid():
-            article = form.save()(commit=False)
+            article = form.save(commit=False)
             article.date_published =datetime.now().date()
-        
+            article.date_verified =datetime.now().date()
             # title = request.POST.get('title')
             # content = request.POST.get('content')
             # article = Article(title=title,content=content,date_published=datetime.now().date())
-            # article.save()
+            article.save()
             
             return redirect('dashboard')
         else:
@@ -56,5 +61,29 @@ def update_article(request,id):
             return redirect('dashboard')
         else:
             return HttpResponse('Invalid Updates')
-            
+ 
+
+@method_decorator(csrf_exempt,name='dispatch')    ##csrf check nagara hai bhanna ko lagi ,to not to check the csrf token as it is class based view      
+class ArticleAPIView(APIView):
+    def get(self,request,id):
+        article = Article.objects.get(id=id)
+        serializer = ArticleSerializer(article)
+        return JsonResponse(serializer.data)
         
+    
+    def delete(self,request,id):
+        article =Article.objects.get(id=id)
+        article.delete()
+        return JsonResponse({"Deleted":True},status=203)
+
+    def put(self,request,id):
+        article =Article.objects.get(id=id)
+        serializer = ArticleSerializer(article,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return  JsonResponse({"updated":True})
+        else:
+            return JsonResponse(serializer.errors,status=204)
+        
+
+

@@ -8,6 +8,4 @@ class Article(models.Model):
     content = models.CharField(max_length = 1000)
     date_published = models.DateField()
     date_verified = models.DateField(null = True)
-    
-    
     #email = models.EmailField(null=True)
