@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body style="background-color:powderblue;">
 
 <h1> Article Blog</h1>
-<table>
+<table  style="background-color:#FFFFE0;">
     <tr>
         <th>Title</th>
         <th>Content</th>
@@ -31,7 +31,78 @@
 
 </table>
 {# {{ article_list }} #}
-<p>This is a demo article blog </p>
-
+{# <a href ="{% url 'add_article' %}" ><button type="button">Add Your Article!</button> </a> #}
 </body>
+
+<br>
+<hr size="8" width="90%" color="black">  
+
+<head>
+<style>
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    
+    .button1 {width: 250px;}
+    .button2 {width: 50%;}
+    .button3 {width: 100%;}
+    </style>
+    </head>
+    <body>
+    
+    <h2>Do post your Article !</h2>
+    
+    <p>Time to showcase the ewriting talent you have ! </p>
+    
+    <a href ="{% url 'add_article' %}" ><button class="button button1">Add Your Article !</button><br> </a>
+    {# <button class="button button2">50%</button><br> #}
+    {# <button class="button button3">100%</button> #}
+    
+    </body>
+
+<br>
+<hr size="8" width="90%" color="black"> 
+
+<head>
+    <style>
+        .button {
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+        }
+        
+        .button1 {width: 250px;}
+        .button2 {width: 50%;}
+        .button3 {width: 100%;}
+        </style>
+        </head>
+        <body>
+        
+        <h2>Model Deployment !</h2>
+        
+        <p>A simple prediction system is implemented here where you can predict you will die or not  ! </p>
+        
+        <a href ="{% url 'add_article' %}" ><button class="button button1">Check your status !</button><br> </a>
+        {# <button class="button button2">50%</button><br> #}
+        {# <button class="button button3">100%</button> #}
+        
+        </body>
+
+
 </html>
